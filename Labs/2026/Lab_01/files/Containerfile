@@ -1,0 +1,85 @@
+FROM ubuntu:24.04
+
+LABEL org.opencontainers.image.authors="paolojoseph.baioni@polimi.it"
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN bash -o pipefail -c 'set -e; \
+  apt-get update \
+  && apt-get install -y --no-install-recommends \
+    bash-completion \
+    ca-certificates \
+    build-essential \
+    clang \
+    clang-format \
+    clang-tidy \
+    clang-tools \
+    cmake \
+    cppcheck \
+    curl \
+    doxygen \
+    emacs-nox \
+    gfortran \
+    git \
+    gnuplot \
+    graphviz \
+    less \
+    libboost-all-dev \
+    libblas-dev \
+    libc++-dev \
+    libc++abi-dev \
+    libeigen3-dev \
+    libhdf5-serial-dev \
+    liblapack-dev \
+    liblapacke-dev \
+    libopenblas-dev \
+    libopenmpi-dev \
+    libtbb-dev \
+    libsuitesparse-dev \
+    libgnuplot-iostream-dev \
+    nano \
+    net-tools \
+    octave \
+    openmpi-bin \
+    openssh-client \
+    procps \
+    pybind11-dev \
+    python-is-python3 \
+    python3 \
+    python3-pip \
+    python3-venv \
+    r-base \
+    software-properties-common \
+    sudo \
+    tar \
+    tzdata \
+    unzip \
+    valgrind \
+    vim \
+    wget \
+    zip \
+    zsh \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*'
+
+ENV mkSuitesparseInc=/usr/include/suitesparse/ \
+    mkOpenblasInc=/usr/include/x86_64-linux-gnu/openblas-pthread \
+    mkTbbInc=/usr/include \
+    mkHdf5Lib=/usr/lib/x86_64-linux-gnu/hdf5/serial/ \
+    mkHdf5Inc=/usr/include/hdf5/serial/ \
+    mkEigenInc=/usr/include/eigen3 \
+    mkTbbLib=/usr/lib/x86_64-linux-gnu/ \
+    mkEigenHome=/usr/include/eigen3 \
+    mkBoostLib=/usr/lib/x86_64-linux-gnu/ \
+    mkPybind11Prefix=/usr/lib/cmake/pybind11 \
+    mkCxxCompiler=/usr/bin/g++ \
+    mkOpenblasLib=/usr/lib/x86_64-linux-gnu/openblas-pthread/ \
+    mkSuitesparseLib=/usr/lib/x86_64-linux-gnu \
+    mkBoostInc=/usr/include
+
+RUN id -u ubuntu &>/dev/null || useradd -m -u 1000 -s /bin/bash ubuntu \
+ && usermod -aG sudo ubuntu \
+ && echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu \
+ && chmod 0440 /etc/sudoers.d/ubuntu
+
+USER ubuntu
+WORKDIR /home/ubuntu

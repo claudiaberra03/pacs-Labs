@@ -258,8 +258,8 @@ command --help
 ### Wildcards
 
 ```bash
-*.cpp: seleziona tuti i file che terminano con l'estensione .cpp
-*.txt: seleziona tutti i file di testo
+*.cpp      #seleziona tuti i file che terminano con l'estensione .cpp
+*.txt      #seleziona tutti i file di testo
 ```
 
 ### History
@@ -271,8 +271,8 @@ history
 ---
 ### Tab completion
 ```bash
-TAB: se premuto mentre si sta scrivendo il nome di un file o di una cartella, Bash cercherà
-     di indovinare cosa si vuole scrivere e completerà il nome
+TAB     #se premuto mentre si sta scrivendo il nome di un file o di una cartella, Bash cercherà
+        #di indovinare cosa si vuole scrivere e completerà il nome
 ```
 Example
 
@@ -283,7 +283,7 @@ cd Do<TAB>
 becomes
 
 ```bash
-cd Documents/ (se "Documents" è l'unica cartella che inizia con "Do")
+cd Documents/    #(se "Documents" è l'unica cartella che inizia con "Do")
 ```
 
 

@@ -64,6 +64,8 @@ We suggest:
 
 The HPC cluster runs Linux and already has Apptainer installed.
 
+![bg right:42% width:550](./files/apptainer-on-ubuntu.png)
+
 ---
 ## Container model
 
@@ -235,7 +237,7 @@ cd ..      # go up
 
 ```bash
 mkdir dir      # create directory
-cp a b         # copy
+cp a b         # copy (-r for directories)
 mv a b         # move/rename
 rm file        # remove file
 ```
@@ -245,6 +247,11 @@ rm file        # remove file
 ```bash
 cat file
 less file
+```
+
+### Echoing
+```bash
+echo "Hello world"
 ```
 
 ### Help
@@ -406,13 +413,14 @@ We strongly suggest using eduroam with TTLS protocol (PoliMi credentials -- w/o 
 $ ip a | grep UP | grep w
 3: wlo1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
 ```
+---
 2. eliminate previous failed connections
 ```bash
 $ nmcli -t -f NAME connection show | grep -i eduroam | while read c; do
   nmcli connection delete "$c"
 done
 ```
-
+---
 3. add new `eduroam` connection
 ```bash
 $ nmcli connection add \
@@ -421,7 +429,7 @@ ifname wlo1 \
 con-name eduroam \
 ssid eduroam
 ```
-
+---
 4. configure it
 ```bash
 nmcli connection modify eduroam \
@@ -431,7 +439,7 @@ wifi-sec.key-mgmt wpa-eap \
 802-1x.anonymous-identity "anonymous@polimi.it" \
 802-1x.phase2-auth pap
 ```
-
+---
 5. activate it, asking for password prompt
 ```bash
 $ nmcli connection up eduroam --ask
